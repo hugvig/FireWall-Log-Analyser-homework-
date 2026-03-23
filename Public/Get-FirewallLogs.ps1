@@ -33,7 +33,7 @@ function Get-FirewallLogs
 
     <#We read each log line and send it to our function that will create the LogObject#>
     $logs =  $lines | ForEach-Object {
-    ConvertFrom-FWLogLine -Line $_
+    ConvertFrom-Log -line $_
     }
 
     return $logs
