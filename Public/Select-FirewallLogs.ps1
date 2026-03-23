@@ -37,7 +37,7 @@ function Select-FirewallLogs
     }
 
     <#initialising our variables#>
-    [string[]] $possibleFields = @("src_ip", "dst_ip", "nat_rule_name", "dst_port", "user_name")
+    [string[]] $possibleFields = @("src_ip", "dst_ip", "fw_rule_name", "dst_port", "user_name")
     $filteredLogs = $null
     
     <#Check if the array fields is not empty#>
