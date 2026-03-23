@@ -24,17 +24,11 @@ function Get-FirewallLogs
 
     try
     {
-        if (!(Test-Path -Path $path))
-        {
-            throw "Cannot find the file at '$path' because it does not exist."
-        }
-
         $lines = Get-Content $path
     }
-    catch
+    catch [System.IO.FileNotFoundException]
     {
-        Write-Error "Cannot find path '$path' because it does not exist."
-        return
+        throw "Cannot find path '$path' because it does not exist."
     }
 
     <#We read each log line and send it to our function that will create the LogObject#>

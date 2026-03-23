@@ -27,6 +27,15 @@ function Select-FirewallLogs
         [string[]] $fields
     )
 
+    try
+    {
+        $logs = Get-FirewallLogs -path $path
+    }
+    catch [System.IO.FileNotFoundException]
+    {
+        throw "Cannot find path '$path' because it does not exist."
+    }
+
     <#initialising our variables#>
     [string[]] $possibleFields = @("src_ip", "dst_ip", "nat_rule_name", "dst_port", "user_name")
     $filteredLogs = $null
@@ -46,7 +55,7 @@ function Select-FirewallLogs
         
         <#We filter the logs based on the user inputed fields. We do that by counting how many fields dont match the ones the user wants
         and check if the lenght of this collection is 0 meaning that they match what the user wants#>
-        $filteredLogs = Get-FirewallLogs -path $path | Where-Object { 
+        $filteredLogs = $logs | Where-Object { 
             $log = $_
             ($fields | Where-Object { !$log.$_ }).Count -eq 0
         } | Select-Object -Property $fields
@@ -55,7 +64,7 @@ function Select-FirewallLogs
     {
         <#We filter the logs selecting all the possible fileds by default. We do that by counting how many fields dont match the ones that are in the possibleFields variable
         and check if the lenght of this collection is 0 meaning that they match what is in the possibleFields variable#>
-    $filteredLogs = Get-FirewallLogs -path $path | Where-Object { 
+    $filteredLogs = $logs | Where-Object { 
             $log = $_
             ($possibleFields | Where-Object { !$log.$_ }).Count -eq 0
         } | Select-Object -Property $possibleFields
