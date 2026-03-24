@@ -37,3 +37,16 @@ Jan 29 00:00:32 dnsmasq[2401431]: UDP 2277814 10.1.5.14/50516 reply tmc-g2.tm-4.
 Jan 29 00:00:32 dnsmasq[2401431]: UDP 2277814 10.1.5.14/50516 reply tmc-g2.tm-4.office.com is 2603:1063:f:107::365:7ea3
 Jan 29 00:00:32 dnsmasq[2401431]: UDP 2277814 10.1.5.14/50516 reply tmc-g2.tm-4.office.com is 2603:1063:f:115::365:7ea3
 Jan 29 00:00:33 dnsmasq[2401431]: UDP 2277817 10.1.5.14/51821 query[AAAA] teams.events.data.microsoft.com from 10.1.5.14
+Jan 29 13:50:52 dnsmasq[2401431]: UDP 2437743 10.1.5.14/63531 cached-stale gateway.fe2.apple-dns.net is 2620:149:a41:280::c
+Jan 29 13:50:52 dnsmasq[2401431]: UDP 2437743 10.1.5.14/63531 cached-stale gateway.fe2.apple-dns.net is 2620:149:a41:280::2c
+Jan 29 13:50:52 dnsmasq[2401431]: UDP 2437743 10.1.5.14/63531 cached-stale gateway.fe2.apple-dns.net is 2620:149:a41:280::34
+Jan 29 13:50:52 dnsmasq[2401431]: UDP 2437743 10.1.5.14/63531 cached-stale gateway.fe2.apple-dns.net is 2620:149:a41:280::2:4
+Jan 29 13:50:52 dnsmasq[2401431]: UDP 2437743 10.1.5.14/63531 cached-stale gateway.fe2.apple-dns.net is 2620:149:a41:280::1c
+Jan 29 13:50:52 dnsmasq[2401431]: UDP 2437743 forwarded gateway.fe2.apple-dns.net to 205.151.222.251
+Jan 29 13:50:52 dnsmasq[2401431]: UDP 2437743 reply gateway.fe2.apple-dns.net is 2620:149:a41:280::c
+Jan 29 13:50:52 dnsmasq[2401431]: UDP 2437743 reply gateway.fe2.apple-dns.net is 2620:149:a41:280::1c
+Jan 29 13:50:52 dnsmasq[2401431]: UDP 2437743 reply gateway.fe2.apple-dns.net is 2620:149:a41:280::24
+Jan 29 13:50:52 dnsmasq[2401431]: UDP 2437743 reply gateway.fe2.apple-dns.net is 2620:149:a41:280::2:4
+Jan 29 13:50:52 dnsmasq[2401431]: UDP 2437743 reply gateway.fe2.apple-dns.net is 2620:149:a41:280::2:3
+Jan 29 13:50:52 dnsmasq[2401431]: UDP 2437743 reply gateway.fe2.apple-dns.net is 2620:149:a41:280::3c
+Jan 29 13:50:52 dnsmasq[2401431]: UDP 2437743 reply gateway.fe2.apple-dns.net is 2620:149:a41:280::2c

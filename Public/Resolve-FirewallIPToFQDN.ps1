@@ -1,4 +1,17 @@
 <#read the PIHole file and get every IP address and resolve them#>
+<#
+.SYNOPSIS
+This function maps the Domain name to its IP adresse(s)
+
+.DESCRIPTION
+This function maps the Domain found in the file from the specified path to its IP addresses
+
+.PARAMETER path
+The relative path to the pihole file
+
+.NOTES
+Author: Loic Ollervides
+#>
 function Resolve-FirewallIPToFQDN()
 {
     Param
@@ -16,10 +29,8 @@ function Resolve-FirewallIPToFQDN()
         throw "Cannot find path '$path' because it does not exist."
     }
 
-    $logs = $lines | ForEach-Object{
-        ConvertFrom-Log -line $_
-    }
+    
 
-    return $logs
+    return Convert-LogToPH -lines $lines 
     
 }
