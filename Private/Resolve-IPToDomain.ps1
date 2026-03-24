@@ -4,7 +4,7 @@ Creates a Log object from a PiHole file
 
 .DESCRIPTION
 Recieves a line from the Firewall log file and uses a regex expression to identfy the name and value of the field,
- then it creates and object using those properties
+ then it creates a hash table with the IP as keys a list of domains as its value
 
 .PARAMETER line
 The Firewall log line recieved from the caller function
@@ -12,7 +12,7 @@ The Firewall log line recieved from the caller function
 .NOTES
 Author: Loic Ollervides
 #>
-function Convert-LogToPH
+function Resolve-IPToDomain
 {
     Param
     (
@@ -24,7 +24,7 @@ function Convert-LogToPH
     $pattern = 'reply\s(\S+)\sis\s(\S+)$'
 
     <#We create an empty hastable for the properties of our object#>
-    $properties = @{}
+    $IPToDomain = @{}
 
     foreach($line in $lines)
     {
@@ -37,25 +37,25 @@ function Convert-LogToPH
          and set it as a key/value pair in our hash table#>
         foreach($match in $fits)
         {
-            $key = $match.Groups[1].Value
-            $value = $match.Groups[2].Value.Trim('"')
+            $key = $match.Groups[2].Value
+            $value = $match.Groups[1].Value
 
-            <#check if the value is not <CNAME>#>
-            if ($value -ne "<CNAME>")
+            <#check if the key is not <CNAME>#>
+            if ($key -ne "<CNAME>")
             {
                 <#check if the key does not exist#>
-                if(!($key -in $properties.Keys))
+                if(!($key -in $IPToDomain.Keys))
                 {
                     <#Create a .Net list (resizable array) of strings#>
-                    $properties[$key] = New-Object System.Collections.Generic.List[string]
-                    $properties[$key].Add($value)
+                    $IPToDomain[$key] = New-Object System.Collections.Generic.List[string]
+                    $IPToDomain[$key].Add($value)
                 }
                 else
                 {
                     <#check if the new value is not already in the values#>
-                    if(!($value -in $properties[$key]))
+                    if(!($value -in $IPToDomain[$key]))
                     {
-                        $properties[$key].Add($value)
+                        $IPToDomain[$key].Add($value)
                     }   
                 }
 
@@ -65,7 +65,7 @@ function Convert-LogToPH
 
     }
 
-    <#We create an object using our hash table#>
-    return [PSCustomObject]$properties
+    <#We return our hash table#>
+    return $IPToDomain
 
 }

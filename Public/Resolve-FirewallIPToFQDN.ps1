@@ -17,20 +17,32 @@ function Resolve-FirewallIPToFQDN()
     Param
     (
         [Parameter (Mandatory)]
-        [string] $path
+        [string] $pathIP,
+
+        [Parameter (Mandatory)]
+        [string] $pathPH
     )
 
     try 
     {
-        $lines = Get-Content $path
+        $linesPH = Get-Content $pathPH
     }
     catch 
     {
-        throw "Cannot find path '$path' because it does not exist."
+        throw "Cannot find path '$pathPH' because it does not exist."
     }
 
-    
+    $MappedIPs = Resolve-IPToDomain -lines $linesPH 
 
-    return Convert-LogToPH -lines $lines 
+    $dst_ip = (Select-FirewallLogs -path $pathIP -fields dst_ip).dst_ip
+
+
+    foreach($ip in $dst_ip)
+    {
+        if ($ip -in $MappedIPs.keys)
+        {
+            Write-host "$ip -> $($MappedIPs[$ip]) `n"
+        }
+    }
     
 }

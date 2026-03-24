@@ -26,7 +26,7 @@ function ConvertFrom-Log
     <#Check which function is the caller and choose the appropriated pattern select the logs#>
     switch ($caller) {
         "Get-FirewallLogs"         { return Convert-LogToFW -line $line }
-        "Resolve-FirewallIPToFQDN" { return Convert-LogToPH -line $line}
+        "Resolve-FirewallIPToFQDN" { return Resolve-IPToDomain -line $line}
         Default { }
     }
 }
